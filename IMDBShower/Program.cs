@@ -103,8 +103,9 @@
                         Console.WriteLine("\n🎥 Resultater:");
                         foreach (var movie in movies)
                         {
-                            Console.WriteLine(movie);
+                            Console.WriteLine(movie.ToString());
                         }
+                        running = false;
                         break;
 
                     case "2": 
@@ -115,8 +116,9 @@
                         Console.WriteLine("\n🧍 Resultater:");
                         foreach (var person in people)
                         {
-                            Console.WriteLine(person);
+                            Console.WriteLine(person.ToString());
                         }
+                        running = false;
                         break;
 
                     case "3": 
