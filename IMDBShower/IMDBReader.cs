@@ -10,7 +10,7 @@ namespace IMDBShower
 {
     public class IMDBReader
     {
-        private string _connectionString; 
+        private readonly string _connectionString;
 
         public IMDBReader()
         {
@@ -76,6 +76,84 @@ namespace IMDBShower
                     list.Add(person);
                 }
                 return list;
+            }
+        }
+
+        public void AddMovie(string primaryTitle, bool? isAdult, int? startYear, int? endYear, int? runTimeMinutes, int? titleTypeId)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new SqlCommand("AddMovie", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@PrimaryTitle", primaryTitle);
+                    cmd.Parameters.AddWithValue("@IsAdult", (object?)isAdult ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@StartYear", (object?)startYear ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@EndYear", (object?)endYear ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@RunTimeMinutes", (object?)runTimeMinutes ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@TitleTypeId", (object?)titleTypeId ?? DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AddPerson(string primaryName, int? birthYear, int? deathYear)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new SqlCommand("AddPerson", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@PrimaryName", primaryName);
+                    cmd.Parameters.AddWithValue("@BirthYear", (object?)birthYear ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@DeathYear", (object?)deathYear ?? DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void UpdateMovie(int? id, string? primaryTitle, bool? isAdult, int? startYear, int? endYear, int? runTimeMinutes)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new SqlCommand("UpdateMovie", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Id", (object?)id ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@PrimaryTitle", (object?)primaryTitle ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@IsAdult", (object?)isAdult ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@StartYear", (object?)startYear ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@EndYear", (object?)endYear ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@RunTimeMinutes", (object?)runTimeMinutes ?? DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void DeleteMovie(int id)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new SqlCommand("DeleteMovie", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }
