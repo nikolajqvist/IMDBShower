@@ -105,7 +105,8 @@
                         {
                             Console.WriteLine(movie.ToString());
                         }
-                        running = false;
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
 
                     case "2": 
@@ -118,7 +119,8 @@
                         {
                             Console.WriteLine(person.ToString());
                         }
-                        running = false;
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
 
                     case "3": 
@@ -150,6 +152,8 @@
 
                         reader.AddMovie(title ?? "Ukendt", isAdult, startYear, endYear, runtime, typeId);
                         Console.WriteLine("\n Film tilføjet!");
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
 
                     case "4": 
@@ -189,6 +193,9 @@
 
                         reader.UpdateMovie(id, newTitle, newIsAdult, newStart, newEnd, newRun);
                         Console.WriteLine("\nFilm opdateret!");
+
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
 
                     case "6": 
@@ -197,6 +204,8 @@
 
                         reader.DeleteMovie(idToDelete);
                         Console.WriteLine("\nFilm slettet!");
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
 
                     case "0": 
@@ -206,6 +215,8 @@
 
                     default:
                         Console.WriteLine("\n Er du ok? indtast et tal imellem 0 - 6?");
+                        Console.WriteLine("\n\nTryk på noget for at komme videre");
+                        Console.ReadKey();
                         break;
                 }
             }
